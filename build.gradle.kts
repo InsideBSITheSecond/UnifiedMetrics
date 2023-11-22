@@ -39,7 +39,7 @@ allprojects {
 subprojects {
     apply(plugin = "java")
     apply(plugin = "kotlin")
-    apply(plugin = "signing")
+//    apply(plugin = "signing")
     apply(plugin = "maven-publish")
 
     tasks.withType<KotlinCompile> {
@@ -68,12 +68,12 @@ subprojects {
         }
     }
     afterEvaluate {
-        configure<SigningExtension> {
-            sign(configurations["archives"])
-        }
+//        configure<SigningExtension> {
+//            sign(configurations["archives"])
+//        }
         tasks.findByName("shadowJar")?.also {
             tasks.named("assemble") { dependsOn(it) }
-            tasks.named("signArchives") { dependsOn(it) }
+//            tasks.named("signArchives") { dependsOn(it) }
         }
     }
 }
