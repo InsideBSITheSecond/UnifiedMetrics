@@ -106,7 +106,7 @@ tasks {
         relocate("io.reactivex", "dev.cubxity.plugins.metrics.libs.io.reactivex")
         relocate("org.apache.common", "dev.cubxity.plugins.metrics.libs.org.apache.common")
         relocate("org.reactivestreams", "dev.cubxity.plugins.metrics.libs.org.reactivestreams")
-        exclude("javax/**", "kotlin/**", "kotlinx/**", "org/jetbrains/**", "org/intellij/**")
+        exclude("javax/**", "kotlin/**", "kotlinx/**", "org/jetbrains/**", "org/intellij/**", "_COROUTINE/**")
         manifest {
             attributes["MixinConfigs"] = mixinConfigName
         }

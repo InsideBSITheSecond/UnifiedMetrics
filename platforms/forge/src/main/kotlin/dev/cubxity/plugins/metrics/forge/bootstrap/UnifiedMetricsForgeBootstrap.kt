@@ -60,13 +60,13 @@ class UnifiedMetricsForgeBootstrap : UnifiedMetricsBootstrap {
     override val dispatcher: CoroutineDispatcher = CurrentThreadDispatcher
 
     @SubscribeEvent
-    private fun onServerStarted(event: ServerStartedEvent) {
+    fun onServerStarted(event: ServerStartedEvent) {
         this.server = event.server
         plugin.enable()
     }
 
     @SubscribeEvent
-    private fun onServerStopping(event: ServerStoppingEvent) {
+    fun onServerStopping(event: ServerStoppingEvent) {
         plugin.disable()
     }
 }
