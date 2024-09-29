@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
 /*
  *     This file is part of UnifiedMetrics.
  *
@@ -16,8 +18,7 @@
  */
 
 plugins {
-    id("fabric-loom") version "1.4.1"
-    id("net.kyori.blossom")
+    id("fabric-loom")
 }
 
 val transitiveInclude: Configuration by configurations.creating {
@@ -30,10 +31,10 @@ dependencies {
     // https://fabricmc.net/versions.html
     minecraft("com.mojang:minecraft:1.17.1")
     mappings("net.fabricmc:yarn:1.17.1+build.65:v2")
-    modImplementation("net.fabricmc:fabric-loader:0.14.23")
+    modImplementation("net.fabricmc:fabric-loader:0.16.5")
 
     modImplementation("net.fabricmc.fabric-api:fabric-api:0.46.1+1.17")
-    modImplementation("net.fabricmc:fabric-language-kotlin:1.10.10+kotlin.1.9.10")
+    modImplementation("net.fabricmc:fabric-language-kotlin:1.12.2+kotlin.2.0.20")
 
     api(project(":unifiedmetrics-core"))
 
@@ -55,11 +56,12 @@ loom {
             isIdeConfigGenerated = true
         }
     }
+    serverOnlyMinecraftJar()
 }
 
 tasks {
     compileKotlin {
-        kotlinOptions.jvmTarget = "16"
+        compilerOptions.jvmTarget.set(JvmTarget.JVM_16)
     }
     processResources {
         filesMatching("fabric.mod.json") {
@@ -76,9 +78,4 @@ tasks {
 java {
     sourceCompatibility = JavaVersion.VERSION_16
     targetCompatibility = JavaVersion.VERSION_16
-}
-
-blossom {
-    replaceTokenIn("src/main/kotlin/dev/cubxity/plugins/metrics/fabric/bootstrap/UnifiedMetricsFabricBootstrap.kt")
-    replaceToken("@version@", version)
 }
